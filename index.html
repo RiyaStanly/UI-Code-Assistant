@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Code Assistant</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CodeMirror CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="bi bi-code-square me-2"></i>UI Code Assistant</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="codeGeneratorBtn"><i class="bi bi-code-slash me-1"></i> Code Generator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="codeAnalyzerBtn"><i class="bi bi-search me-1"></i> Code Analyzer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="designCritiqueBtn"><i class="bi bi-palette me-1"></i> Design Critique</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Code Editor Section -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title"><i class="bi bi-code-square me-2"></i>Code Editor</h5>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-outline-secondary" id="copyCode"><i class="bi bi-clipboard me-1"></i>Copy</button>
+                            <button class="btn btn-sm btn-outline-secondary" id="clearCode"><i class="bi bi-trash me-1"></i>Clear</button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <textarea id="codeEditor"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title"><i class="bi bi-tools me-2"></i>Tools</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Code Generator Tools -->
+                        <div id="codeGeneratorTools" class="tool-section">
+                            <h6><i class="bi bi-magic me-1"></i>UI Components</h6>
+                            <div class="mb-3">
+                                <label for="componentPrompt" class="form-label">Describe your component</label>
+                                <textarea class="form-control" id="componentPrompt" rows="3" placeholder="Describe the UI component you want to create (e.g., 'Create a login form with email and password fields, remember me checkbox, and a sign in button')"></textarea>
+                            </div>
+                            <button class="btn btn-primary mb-3 w-100" id="generateComponentBtn"><i class="bi bi-magic me-1"></i>Generate Component</button>
+                            <hr>
+                            <h6 class="mt-3"><i class="bi bi-collection me-1"></i>Quick Templates</h6>
+                            <div class="dropdown w-100 mb-3">
+                                <button class="btn btn-outline-primary dropdown-toggle w-100" type="button" id="templateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-file-earmark-code me-1"></i>Select Template
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="templateDropdown">
+                                    <li><a class="dropdown-item" href="#" data-component="login"><i class="bi bi-box-arrow-in-right me-1"></i>Login Form</a></li>
+                                    <li><a class="dropdown-item" href="#" data-component="navbar"><i class="bi bi-list me-1"></i>Navigation Bar</a></li>
+                                    <li><a class="dropdown-item" href="#" data-component="cart"><i class="bi bi-cart me-1"></i>Shopping Cart</a></li>
+                                    <li><a class="dropdown-item" href="#" data-component="registration"><i class="bi bi-person-plus me-1"></i>Registration</a></li>
+                                    <li><a class="dropdown-item" href="#" data-component="productCard"><i class="bi bi-card-image me-1"></i>Product Card</a></li>
+                                    <li><a class="dropdown-item" href="#" data-component="searchBar"><i class="bi bi-search me-1"></i>Search Bar</a></li>
+                                    <li><a class="dropdown-item" href="#" data-component="modal"><i class="bi bi-window me-1"></i>Modal</a></li>
+                                    <li><a class="dropdown-item" href="#" data-component="profileEditor"><i class="bi bi-person-gear me-1"></i>Profile Editor</a></li>
+                                    <li><a class="dropdown-item" href="#" data-component="orderSummary"><i class="bi bi-receipt me-1"></i>Order Summary</a></li>
+                                    <li><a class="dropdown-item" href="#" data-component="contactForm"><i class="bi bi-envelope me-1"></i>Contact Form</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Code Analyzer Tools -->
+                        <div id="codeAnalyzerTools" class="tool-section d-none">
+                            <h6><i class="bi bi-search me-1"></i>Analysis Tools</h6>
+                            <button class="btn btn-info mb-3 w-100" id="analyzeCode"><i class="bi bi-search me-1"></i>Analyze Code</button>
+                            <div id="analysisResults" class="mt-3"></div>
+                        </div>
+
+                        <!-- Design Critique Tools -->
+                        <div id="designCritiqueTools" class="tool-section d-none">
+                            <h6><i class="bi bi-palette me-1"></i>Design Analysis</h6>
+                            <button class="btn btn-success mb-3 w-100" id="startCritique"><i class="bi bi-palette me-1"></i>Analyze Design</button>
+                            <div id="critiqueResults" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
